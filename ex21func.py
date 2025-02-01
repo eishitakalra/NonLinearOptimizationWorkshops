@@ -1,32 +1,37 @@
 """
-% This is the Example 1.3 from the lecture, which is also Example 0.1 from
-% Roos/Terlaky/DeKlerk:
+% This is the Example 2.1 from the lecture
 %
-%  f(x,y) =  x^2(4-2.1*x^2+1/3*x^4) + xy + y^2(-4+4y^2)
+%  f(x,y) = x^4 + 2x^3 + 2x^2 + y^2 -2xy
 % 
-% df/dx = 2x*(4-2.1*x^2+1/3*x^4) + x^2*(4/3x^3-4.2*x) + y
-%       = 2/3x^5-4.2x^3+8x +4/3x^5 - 4.2x^3 + y
-%       = 2x^5 - 8.4x^3 + 8x + y
-% df/dy = x + y^2(8y) + 2y(4y^2-4)
-%       = 8y^3 + 8y^3 -8 y + x = 16y^3 - 8y + x
+% df/dx = 4x^3 + 6x^2 + 4x - 2y
+% df/dy = 2y - 2x
 %
-% d2f/dx2 =10*x^4 - 25.2x^2 + 8
-% d2f/dxdy = 1
-% d2f/dy2 = 48y^2 - 8
+% d2f/dx2  = 12x^2 + 12x + 4
+% d2f/dxdy = -2
+% d2f/dy2  = 2
 %
 % This is called as 
-%    f = ex13(0, x);   - to get the function value f(x) at x
-%    g = ex13(1, x);   - to get the gradient value \nabla f(x) at x
-%    H = ex13(2, x);   - to get the Hessian value \nabla^2 f(x) at x
+%    f = ex21(0, x);   - to get the function value f(x) at x
+%    g = ex21(1, x);   - to get the gradient value \nabla f(x) at x
+%    H = ex21(2, x);   - to get the Hessian value \nabla^2 f(x) at x
 %
 """
 import numpy as np
 
-# ex13 function code
-def ex13(ord, x, y=None):
-    # check how many arguments are passed
+# ex31 function code
+def ex21(ord, x, y=None):
     if y is None:
         #print("argument y was not passed")
+        #if isinstance(x, list):
+        #    print("x is a list")
+        #else:
+        #    print("x is not a list")
+            
+        #if isinstance(x, np.ndarray):
+        #    print("x is a numpy array")
+        #else:
+        #    print("x is not a numpy array")
+    
 
         # the next bit of code is to ensure that this works if x is a
         # list, 1-d np.array, 2-d np.array (in row or column orientation)
@@ -58,27 +63,25 @@ def ex13(ord, x, y=None):
 
         x1 = x
         x2 = y
-    # - - - - - evaluate the function and its derivatives
+
     
     if ord == 0:
         # return the function value
-        f = 1/3*x1**6 - 2.1*x1**4 + 4*x1**2 + x1*x2 + 4*x2**4 - 4*x2**2
+        f = x1**4 + 2*x1**3 + 2*x1**2 + x2**2 - 2*x1*x2
         return f
     elif ord == 1:
         # gradient value is required
 
         # gradient of \|x-loc(i)\|^2 is 2*(x-loc(i))
-        #dx = 2x^5 - 4.2x^3 - 4.2x^2 +8x + y
-        dx = 2*x1**5 - 8.4*x1**3 + 8*x1 + x2
-        #dy = 8y^3 + 8y^3 -8 y + x = 16y^3 - 8y + x
-        dy = x1 + 16*x2**3 - 8*x2
+        dx = 4*x1**3 + 6*x1**2 + 4*x1 - 2*x2
+        dy = 2*x2 - 2*x1
         val = np.array([dx, dy])
         return val
     elif ord == 2:
         # hessian value is required
         val = np.array([
-            [10*x1**4-25.2*x1**2+8, 1],
-            [1, 48*x2**2-8]
+            [12*x1**2 + 12*x1 + 4, -2],
+            [-2, 2]
             ])
         return val
     else:
