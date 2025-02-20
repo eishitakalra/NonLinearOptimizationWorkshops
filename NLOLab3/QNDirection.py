@@ -65,8 +65,8 @@ def  QNDirection(Hk, xkp, xk, gkp, gk):
     else:
         raise ValueError("did not recognise update")
 
-    print("QN inverse Hessian approx is:")
-    print(Hkp)
+    # print("QN inverse Hessian approx is:")
+    # print(Hkp)
     
     dkp = -Hkp.dot(gkp)
 

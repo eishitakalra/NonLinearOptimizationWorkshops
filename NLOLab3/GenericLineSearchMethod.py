@@ -190,8 +190,8 @@ def  GLSM(x0, func, eps):
             print("gk=")
             print(gk)
 
-    print("Hessian at sol:")
-    print(func(2, xk))
+    # print("Hessian at sol:")
+    # print(func(2, xk))
 
     print("GLSM took total of "+str(tot_neval)+" function evaluations")   
 
